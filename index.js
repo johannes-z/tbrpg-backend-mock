@@ -1,9 +1,35 @@
 var restify = require('restify')
 
-function respond (req, res, next) {
-  res.send('hello ' + req.params.name)
-  next()
-}
+/**
+ * Routes
+ *
+ * Locations
+ * GET Index: /locations
+ * GET Show: /location/:location
+ * GET List: /location/list
+ * POST Create: /location
+ *  GET Create: /location/create
+ * UPDATE Edit: /location/:location
+ *    GET Edit: /location/:location/edit
+ * DELETE Delete: /location/:location
+ *
+ * Characters
+ * GET Index: /characters
+ * GET Show (Biography): /character/:character
+ * POST Create: /character
+ *  GET Create: /character/create
+ * UPDATE Edit (Biography): /character/:character/edit
+ *    GET Edit (Biography): /character/:character/edit
+ * DELETE Delete: /character/:character
+ *
+ * Posts
+ * GET Show: /location/:location/posts
+ * POST Create: /location/:location/posts
+ *  GET Create: /location/:location/posts
+ * UPDATE Edit: /location/:location/post/:post
+ *    GET Edit: /location/:location/post/:post
+ * DELETE Delete: /location/:location/post/:post
+ */
 
 var server = restify.createServer()
 
