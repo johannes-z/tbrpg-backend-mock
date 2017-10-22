@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "restify": "^6.2.2"
+    "restify": "^6.2.2",
+    "sequelize": "^4.15.2"
   },
   "devDependencies": {
     "fs": "0.0.1-security",

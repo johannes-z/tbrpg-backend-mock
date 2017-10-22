@@ -1,7 +1,12 @@
 var restify = require('restify')
 var sqlite3 = require('sqlite3').verbose()
+global.db = new sqlite3.Database('./db.sqlite')
 
-var db = new sqlite3.Database('./db.sqlite')
+var characterRoutes = require('./routes/characters/index')
+var locationRoutes = require('./routes/locations/index')
+
+console.log(characterRoutes)
+console.log(locationRoutes)
 
 /**
  * Routes
