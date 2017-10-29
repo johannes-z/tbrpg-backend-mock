@@ -1,12 +1,22 @@
 var restify = require('restify')
 var sqlite3 = require('sqlite3').verbose()
 global.db = new sqlite3.Database('./db.sqlite')
+var server = restify.createServer()
+global.server = server
 
+server.use(restify.plugins.bodyParser())
+
+server.use(
+  function crossOrigin (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With')
+    return next()
+  }
+)
+
+var userRoutes = require('./routes/users/auth')
 var characterRoutes = require('./routes/characters/index')
 var locationRoutes = require('./routes/locations/index')
-
-console.log(characterRoutes)
-console.log(locationRoutes)
 
 /**
  * Routes
@@ -21,14 +31,6 @@ console.log(locationRoutes)
  *    GET Edit: /location/:location/edit
  * DELETE Delete: /location/:location
  *
- * Characters
- * GET Index: /characters
- * GET Show (Biography): /character/:character
- * POST Create: /character
- *  GET Create: /character/create
- * UPDATE Edit (Biography): /character/:character/edit
- *    GET Edit (Biography): /character/:character/edit
- * DELETE Delete: /character/:character
  *
  * Posts
  * GET Show: /location/:location/posts
@@ -38,16 +40,6 @@ console.log(locationRoutes)
  *    GET Edit: /location/:location/post/:post
  * DELETE Delete: /location/:location/post/:post
  */
-
-var server = restify.createServer()
-
-server.use(
-  function crossOrigin (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With')
-    return next()
-  }
-)
 
 server.get('/about', (req, res, next) => {
   res.send('Lorem Ipsum')
